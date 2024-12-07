@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj43a3ouhmr7w"]
+
+[ext_resource type="Script" path="res://Scripts/Board/Board.cs" id="1_ys1n6"]
+
+[node name="ChessBoard" type="Node2D"]
+
+[node name="Board" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ys1n6")

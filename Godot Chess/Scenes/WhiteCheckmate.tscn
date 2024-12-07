@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://omh2nwmi58e5"]
+
+[ext_resource type="Script" path="res://Scripts/ReturnToMenu.cs" id="1_2pmat"]
+[ext_resource type="Texture2D" uid="uid://dfts52trbc633" path="res://Sprites/white_pawn.png" id="2_e6wl7"]
+[ext_resource type="Texture2D" uid="uid://bhaifkbfbglxh" path="res://Sprites/white_knight.png" id="3_vfujk"]
+[ext_resource type="Texture2D" uid="uid://clpop61s6ubt6" path="res://Sprites/white_bishop.png" id="4_8c3b6"]
+[ext_resource type="Texture2D" uid="uid://byq3mpf7eri3b" path="res://Sprites/white_rook.png" id="5_8kaom"]
+[ext_resource type="Texture2D" uid="uid://bt6uo2k3afgh2" path="res://Sprites/white_queen.png" id="6_vynrl"]
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 80
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="White wins" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "White wins"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Return to menu" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Return to menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_2pmat")
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Return to menu"]
+layout_mode = 2
+offset_left = -6.0
+offset_top = -2.0
+offset_right = 389.0
+offset_bottom = 75.0
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Pawn" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_e6wl7")
+
+[node name="Knight" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("3_vfujk")
+
+[node name="Bishop" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("4_8c3b6")
+
+[node name="Rook" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("5_8kaom")
+
+[node name="Queen" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("6_vynrl")
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Return to menu/Button" to="HBoxContainer/VBoxContainer/Return to menu" method="OnGuiInput"]
