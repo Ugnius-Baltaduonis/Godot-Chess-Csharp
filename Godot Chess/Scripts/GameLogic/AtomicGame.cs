@@ -93,7 +93,11 @@ public partial class AtomicGame : GameLogic
 			}
 		}
 		if (move.Type == MoveType.PawnPromote) PromotingPiece = selectedPiece;
-		if (move.IsCapture == true)	ExplodePiece( move);
+		if (move.IsCapture == true)
+		{
+			ExplodePiece(move);
+			if(selectedPiece is Pawn) RemovePiece(selectedPiece);
+		}
 		if (blackKingPos == new Vector2I(-1, -1) && whiteKingPos == new Vector2I(-1, -1)) gameState = GameState.Stalemate;
 		else if (blackKingPos == new Vector2I(-1, -1))
 		{
@@ -105,7 +109,7 @@ public partial class AtomicGame : GameLogic
 			gameState = GameState.Checkmate;
 			winner = PlayerColor.Black;
 		}
-		selectedPiece.HasMoved = true;
+		if(selectedPiece != null) selectedPiece.HasMoved = true;
 		isWhitesTurn = !isWhitesTurn;
 		positions.Add(ConvertBoardToFENNoMoves());
 		if (fiftyMoveRule >= 100) gameState = GameState.FiftyMoveRule;
