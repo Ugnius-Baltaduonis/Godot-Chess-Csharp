@@ -5,7 +5,7 @@ using System.Linq;
 public abstract partial class GameLogic : Node
 {
 	protected Board board;
-    protected Vector2 pieceScale;
+	protected Vector2 pieceScale;
 	protected Vector2I BoardOffset;
 	public Vector2I enPassantSquare = new Vector2I(-1, -1);
 	public Vector2I whiteKingPos;
@@ -40,6 +40,10 @@ public abstract partial class GameLogic : Node
 		Square SquareFrom = board.Squares[move.From.X, move.From.Y];
 		if (SquareTo.SquarePiece != null)
 		{
+			if(SquareTo.SquarePiece is King){
+				winner = isWhitesTurn? PlayerColor.White : PlayerColor.Black;
+				gameState = GameState.Checkmate;
+			}
 			RemovePiece(SquareTo.SquarePiece);
 		}
 		SquareTo.SquarePiece = SquareFrom.SquarePiece;
@@ -246,7 +250,7 @@ public abstract partial class GameLogic : Node
 		else
 		{
 		fenIndex++;
-            enPassantSquare = new Vector2I(fen[fenIndex] - 'a', 8 - (fen[fenIndex + 1] - '0'));
+			enPassantSquare = new Vector2I(fen[fenIndex] - 'a', 8 - (fen[fenIndex + 1] - '0'));
 			fenIndex += 3;
 		}
 	}
@@ -363,15 +367,15 @@ public abstract partial class GameLogic : Node
 		fenarrindex++;
 		fenarr[fenarrindex] = ' ';
 		fenarrindex++;
-        if (castlingRights > 0)
-        {
-            // For each bit, we check and append the appropriate character if the right is present
-            if ((castlingRights & 0b1000) != 0) fenarr[fenarrindex++] = 'K';
-            if ((castlingRights & 0b0100) != 0) fenarr[fenarrindex++] = 'Q';
-            if ((castlingRights & 0b0010) != 0) fenarr[fenarrindex++] = 'k';
-            if ((castlingRights & 0b0001) != 0) fenarr[fenarrindex++] = 'q';
-        }
-        else
+		if (castlingRights > 0)
+		{
+			// For each bit, we check and append the appropriate character if the right is present
+			if ((castlingRights & 0b1000) != 0) fenarr[fenarrindex++] = 'K';
+			if ((castlingRights & 0b0100) != 0) fenarr[fenarrindex++] = 'Q';
+			if ((castlingRights & 0b0010) != 0) fenarr[fenarrindex++] = 'k';
+			if ((castlingRights & 0b0001) != 0) fenarr[fenarrindex++] = 'q';
+		}
+		else
 		{
 			fenarr[fenarrindex] = '-';
 			fenarrindex++;
