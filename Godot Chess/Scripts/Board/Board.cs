@@ -158,7 +158,6 @@ public partial class Board : Control, IEnumerable<Square>
 	//Handles input on the board during regular play
 	private void BoardControl(InputEvent @event)
 	{
-		if(!gameLogic.PlayerHasMoves((gameLogic.isWhitesTurn ? PlayerColor.White : PlayerColor.Black))) return;
 		if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.ButtonIndex == MouseButton.Left)
 		{
 			if (eventMouseButton.IsPressed())
@@ -190,6 +189,7 @@ public partial class Board : Control, IEnumerable<Square>
 						// Make the move
 						Move makemove = legalMoves.Single(move => move.To.Equals(dropsquare));
 						makemove.MakeMove(this);
+						if(!gameLogic.PlayerHasMoves((gameLogic.isWhitesTurn ? PlayerColor.White : PlayerColor.Black))) return;
 					}
 					else selectedPiece.Sprite.Position = GetPositionFromCoordinates(selectedPiece.Position);
 				}
